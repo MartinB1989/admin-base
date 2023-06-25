@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Drawer, Paper } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
@@ -30,7 +31,34 @@ export default function NavBar() {
             </IconButton>
           </div>
         </Paper>
+        {
+          links.map((itemLink, index) => {
+            return (
+              <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                <IconButton edge="start" color="primary" sx={{ mr: 2 }}>
+                  {itemLink.icon}
+                </IconButton>
+                <Link to="/">{itemLink.name}</Link>
+              </div>
+            )
+          })
+        }
       </Drawer>
     </Box>
   );
 }
+
+const links = [
+  {
+    name: 'Dashboard',
+    icon: <KeyboardArrowLeftIcon/>
+  },
+  {
+    name: 'Dashboard',
+    icon: <KeyboardArrowLeftIcon/>
+  },
+  {
+    name: 'Dashboard',
+    icon: <KeyboardArrowLeftIcon/>
+  }
+]

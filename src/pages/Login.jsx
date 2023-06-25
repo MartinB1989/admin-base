@@ -2,7 +2,7 @@ import { Stack, TextField } from '@mui/material'
 import React from 'react'
 import '../assets/scss/login.scss'
 
-export const Login = () => {
+const Login = () => {
   return (
     // <Container maxWidth="md" className="login-container">
       <Stack
@@ -20,3 +20,5 @@ export const Login = () => {
     // </Container>
   )
 }
+
+export default Login
