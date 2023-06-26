@@ -37,11 +37,11 @@ export const routes = [
       {
         path: '/stock',
         element: lazy(async() => await import('../pages/Stock'))
+      },
+      {
+        path: '*',
+        element: lazy(async() => await import('../pages/Error404'))
       }
     ]
   },
-  {
-    path: '*',
-    element: lazy(async() => await import('../pages/Error404'))
-  }
 ]
