@@ -7,10 +7,21 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Drawer, Paper } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LoginIcon from '@mui/icons-material/Login';
 import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
+  const linkStyle = {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: '0 16px',
+    textDecoration: 'none',
+    color: '#000000',
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -34,12 +45,12 @@ export default function NavBar() {
         {
           links.map((itemLink, index) => {
             return (
-              <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-                <IconButton edge="start" color="primary" sx={{ mr: 2 }}>
+              <Link to={itemLink.path} style={linkStyle} key={index}>
+                <IconButton edge="start" color="#000000" sx={{ mr: 2 }}>
                   {itemLink.icon}
                 </IconButton>
-                <Link to="/">{itemLink.name}</Link>
-              </div>
+                {itemLink.name}
+              </Link>
             )
           })
         }
@@ -51,14 +62,17 @@ export default function NavBar() {
 const links = [
   {
     name: 'Dashboard',
-    icon: <KeyboardArrowLeftIcon/>
+    icon: <DashboardIcon/>,
+    path: '/'
   },
   {
-    name: 'Dashboard',
-    icon: <KeyboardArrowLeftIcon/>
+    name: 'Login',
+    icon: <LoginIcon/>,
+    path: 'login'
   },
   {
-    name: 'Dashboard',
-    icon: <KeyboardArrowLeftIcon/>
-  }
+    name: 'Stock',
+    icon: <LoginIcon/>,
+    path: 'stock'
+  },
 ]

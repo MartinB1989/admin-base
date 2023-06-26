@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes } from 'react-router-dom';
-import  { renderRoutes } from './routes';
+import  { renderRoutes, routes } from './routes';
 
 function App() {
   return (
       <BrowserRouter>
         <Routes>
-          {renderRoutes()}
+          {renderRoutes(routes)}
         </Routes>
       </BrowserRouter>
   );

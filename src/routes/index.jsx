@@ -1,29 +1,47 @@
-import React, { lazy, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import React, { lazy, Fragment, Suspense } from 'react'
+import { Outlet, Route } from 'react-router-dom'
 
-export const renderRoutes = () => {
+export const renderRoutes = (routes) => {
   return routes.map((route, index) => {
     const Component = route.element || Fragment
     const Layout = route.layout || Fragment
-    return <Route path={route.path}
-      element={
-        <Layout>
-          <Component />
-        </Layout>
-      }
-      key={index}
-    />
+    return (
+      <Route path={route.path}
+        element={
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Layout>
+              { route.children ? <Outlet/> : <Component/>}
+            </Layout>
+          </Suspense>
+        }
+        key={index}
+      >
+        {route.children && renderRoutes(route.children)}
+      </Route>
+    )
   })
 }
 
 export const routes = [
   {
-    path: '/',
-    element: lazy(async() => await import('../pages/Dashboard')),
-    layout: lazy(async() => await import('../layouts/MainLayout'))
+    layout: lazy(async() => await import('../layouts/MainLayout')),
+    children: [
+      {
+        path: '/',
+        element: lazy(async() => await import('../pages/Dashboard')),
+      },
+      {
+        path: '/login',
+        element: lazy(async() => await import('../pages/Login'))
+      },
+      {
+        path: '/stock',
+        element: lazy(async() => await import('../pages/Stock'))
+      }
+    ]
   },
   {
-    path: '/login',
-    element: lazy(async() => await import('../pages/Login'))
+    path: '*',
+    element: lazy(async() => await import('../pages/Error404'))
   }
 ]
